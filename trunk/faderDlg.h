@@ -51,6 +51,11 @@ private:
 	int m_nCurrentFrameCount;
 	int m_nTotalFrameCount;
 	int m_nLastFrameCount;
+	CSortableStringArray m_szaSelectedFiles;
+	CString m_szOutPath;
+	CString m_szInPath;
+	CRenderThread* m_pRenderThread;
+	COneSecTickThread* m_pOneSecTickThread;
 
 	LRESULT StatusMsgDispatcher( WPARAM wp, LPARAM lp );
 	void CheckThatWeCanStart();
@@ -60,10 +65,6 @@ private:
 // Implementation
 protected:
 	HICON m_hIcon;
-	CSortableStringArray m_szaSelectedFiles;
-	CString m_szPath;
-	CRenderThread* m_pRenderThread;
-	COneSecTickThread* m_pOneSecTickThread;
 
 	// Generated message map functions
 	virtual BOOL OnInitDialog();
