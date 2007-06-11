@@ -173,14 +173,7 @@ void CfaderDlg::OnBnClickedButton1()
 
 	if( strlen( szDir ) )
 	{
-		m_szaSelectedFiles.RemoveAll();
-		bool b1 = FindFilesInDir( szDir, "*.jpg" );
-		bool b2 = FindFilesInDir( szDir, "*.jpeg" );
-		bool b3 = FindFilesInDir( szDir, "*.bmp" );
-		if( !b1 && !b2 && !b3 )
-		{
-			MessageBox( CString( "No image files has been found in \"" ) + szDir + "\"!", "Error", MB_ICONERROR | MB_OK );
-		}
+		m_szInPath = szDir;
 	}
 
 	CheckThatWeCanStart();
@@ -209,7 +202,7 @@ void CfaderDlg::OnBnClickedButton2()
 
 	if( strlen( szDir ) )
 	{
-		m_szPath = szDir;
+		m_szOutPath = szDir;
 	}
 
 	CheckThatWeCanStart();
@@ -225,7 +218,7 @@ void CfaderDlg::CheckThatWeCanStart()
 		i = atoi( szTmp );
 	}
 
-	if( ( m_szPath.GetLength() > 0 ) && ( m_szaSelectedFiles.GetSize() > 1 ) && ( i >= 0 ) )
+	if( ( m_szOutPath.GetLength() > 0 ) && ( m_szInPath.GetLength() > 0 ) && ( i >= 0 ) )
 	{
 		m_StartButton.EnableWindow( true );
 	}
@@ -262,6 +255,16 @@ void CfaderDlg::OnBnClickedOk()
 	else
 	{
 		// start has been pressed
+		m_szaSelectedFiles.RemoveAll();
+		bool b1 = FindFilesInDir( m_szInPath, "*.jpg" );
+		bool b2 = FindFilesInDir( m_szInPath, "*.jpeg" );
+		bool b3 = FindFilesInDir( m_szInPath, "*.bmp" );
+		if( !b1 && !b2 && !b3 )
+		{
+			MessageBox( CString( "No image files has been found in \"" ) + m_szInPath + "\"!", "Error", MB_ICONERROR | MB_OK );
+			return;
+		}
+
 		m_szaSelectedFiles.Sort();
 		m_StartButton.SetWindowText( "Stop" );
 		m_InputImagesSelectButton.EnableWindow( false );
@@ -278,7 +281,7 @@ void CfaderDlg::OnBnClickedOk()
 		CString szTmp;
 		m_FramesNumber.GetWindowText( szTmp );
 		int i = atoi( szTmp );
-		m_pRenderThread->Init( &m_szaSelectedFiles, m_szPath, i, m_LeaveCheckBox.GetCheck(), m_JPEGOut.GetCheck(), this->m_hWnd );
+		m_pRenderThread->Init( &m_szaSelectedFiles, m_szOutPath, i, m_LeaveCheckBox.GetCheck(), m_JPEGOut.GetCheck(), this->m_hWnd );
 		m_pRenderThread->Start();
 		m_pOneSecTickThread->Start();
 	}
