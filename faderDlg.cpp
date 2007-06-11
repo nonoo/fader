@@ -95,11 +95,9 @@ BOOL CfaderDlg::OnInitDialog()
 
 	// TODO: Add extra initialization here
 	m_FramesNumber.SetWindowText( "1" );
-	CString tmp;
-	tmp.Format( "fader v%s", VERSION );
-	this->SetWindowText( tmp );
-	tmp = tmp + " by Nonoo";
-	m_StatusText.SetWindowText( tmp );
+	m_szOriginalWindowTitle.Format( "fader v%s", VERSION );
+	this->SetWindowText( m_szOriginalWindowTitle );
+	m_StatusText.SetWindowText( m_szOriginalWindowTitle + " by Nonoo" );
 	m_pRenderThread = NULL;
 	m_pOneSecTickThread = NULL;
 	m_LeaveCheckBox.SetCheck( 1 );
@@ -274,6 +272,7 @@ void CfaderDlg::OnBnClickedOk()
 		m_SpinButton.EnableWindow( false );
 		m_JPEGOut.EnableWindow( false );
 		m_BMPOut.EnableWindow( false );
+		this->SetWindowText( m_szOriginalWindowTitle + " [WORKING]" );
 
 		m_nLastFrameCount = 0;
 
@@ -300,9 +299,11 @@ LRESULT CfaderDlg::StatusMsgDispatcher( WPARAM wp, LPARAM lp )
 	{
 		case STATUSMSG_DONE:
 			m_StatusText.SetWindowText( "Done." );
+			this->SetWindowText( m_szOriginalWindowTitle + " [DONE]" );
 			MessageBox( "Done!", "fader", MB_OK );
 			break;
 		case STATUSMSG_SIZE_MISMATCH:
+			this->SetWindowText( m_szOriginalWindowTitle + " [ERROR]" );
 			MessageBox( "Image size mismatch!", "Error", MB_ICONERROR|MB_OK );
 			break;
 		case STATUSMSG_PROGRESS:
@@ -390,6 +391,7 @@ void CfaderDlg::ResetDialog()
 	m_SpinButton.EnableWindow( true );
 	m_JPEGOut.EnableWindow( true );
 	m_BMPOut.EnableWindow( true );
+	this->SetWindowText( m_szOriginalWindowTitle );
 
 	m_nLastFrameCount = 0;
 
