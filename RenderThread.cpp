@@ -165,12 +165,12 @@ void CRenderThread::Create()
 	this->PostThreadMessage( WU_THREAD_PROCESS, 0, 0 );
 }
 
-void CRenderThread::Init( CSortableStringArray* szaInFiles, TCHAR* szOutDir, int nFramesToInsert, int fLeaveOutIntermediateFrames, int fJPEGOut, HWND ParentWnd )
+void CRenderThread::Init( CSortableStringArray* szaInFiles, CString szOutDir, int nFramesToInsert, int fLeaveOutIntermediateFrames, int fJPEGOut, HWND ParentWnd )
 {
+	m_szOutDir = szOutDir;
 	m_hParentWnd = ParentWnd;
 	m_nFramesToInsert = nFramesToInsert;
 	m_szaInFiles = szaInFiles;
-	m_szOutDir = szOutDir;
 	m_fLeaveOutIntermediateFrames = fLeaveOutIntermediateFrames;
 	m_fJPEGOut = fJPEGOut;
 }

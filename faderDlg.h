@@ -61,7 +61,7 @@ private:
 protected:
 	HICON m_hIcon;
 	CSortableStringArray m_szaSelectedFiles;
-	TCHAR m_szPath[MAX_PATH];
+	CString m_szPath;
 	CRenderThread* m_pRenderThread;
 	COneSecTickThread* m_pOneSecTickThread;
 
