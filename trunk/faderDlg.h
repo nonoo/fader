@@ -54,6 +54,7 @@ private:
 	CSortableStringArray m_szaSelectedFiles;
 	CString m_szOutPath;
 	CString m_szInPath;
+	CString m_szOriginalWindowTitle;
 	CRenderThread* m_pRenderThread;
 	COneSecTickThread* m_pOneSecTickThread;
 
