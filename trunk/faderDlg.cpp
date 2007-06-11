@@ -94,7 +94,6 @@ BOOL CfaderDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
 	// TODO: Add extra initialization here
-	memset( m_szPath, 0, MAX_PATH );
 	m_FramesNumber.SetWindowText( "1" );
 	CString tmp;
 	tmp.Format( "fader v%s", VERSION );
@@ -189,13 +188,15 @@ void CfaderDlg::OnBnClickedButton1()
 
 void CfaderDlg::OnBnClickedButton2()
 {
+	TCHAR szDir[MAX_PATH];
+
 	BROWSEINFO bi = { 0 };
 	bi.lpszTitle = _T("Select the output directory!");
 	LPITEMIDLIST pidl = SHBrowseForFolder( &bi );
 	if ( pidl != 0 )
 	{
 		// get the name of the folder
-		SHGetPathFromIDList ( pidl, m_szPath );
+		SHGetPathFromIDList ( pidl, szDir );
 
 		// free memory used
 		IMalloc* imalloc = NULL;
@@ -204,6 +205,11 @@ void CfaderDlg::OnBnClickedButton2()
 			imalloc->Free( pidl );
 			imalloc->Release();
 		}
+	}
+
+	if( strlen( szDir ) )
+	{
+		m_szPath = szDir;
 	}
 
 	CheckThatWeCanStart();
@@ -219,7 +225,7 @@ void CfaderDlg::CheckThatWeCanStart()
 		i = atoi( szTmp );
 	}
 
-	if( strlen( m_szPath ) && ( m_szaSelectedFiles.GetSize() > 1 ) && ( i >= 0 ) )
+	if( ( m_szPath.GetLength() > 0 ) && ( m_szaSelectedFiles.GetSize() > 1 ) && ( i >= 0 ) )
 	{
 		m_StartButton.EnableWindow( true );
 	}

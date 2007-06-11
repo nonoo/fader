@@ -25,7 +25,7 @@ private:
 
 	int						m_fJPEGOut;
 	CSortableStringArray*	m_szaInFiles;
-	TCHAR*					m_szOutDir;
+	CString					m_szOutDir;
 	int						m_nFramesToInsert;
 	int						m_fLeaveOutIntermediateFrames;
 	HWND					m_hParentWnd;
@@ -54,7 +54,7 @@ public:
 	void					Start();
 	void					Stop();
 	void					Create();
-	void					Init( CSortableStringArray* szaInFiles, TCHAR* szOutDir, int nFramesToInsert, int fLeaveOutIntermediateFrames, int fJPEGOut, HWND ParentWnd );
+	void					Init( CSortableStringArray* szaInFiles, CString szOutDir, int nFramesToInsert, int fLeaveOutIntermediateFrames, int fJPEGOut, HWND ParentWnd );
 
 protected:
 	DECLARE_MESSAGE_MAP()

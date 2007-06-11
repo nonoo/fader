@@ -19,19 +19,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 WHAT IS FADER?
 --------------
-VideoPad is a simple, client-server based video conferencing system. Users
-connect and send audio/video data to the central server which distributes
-received data back to them. This way a client doesn't have to have large upload
-bandwidth to communicate with other people.
+Fader is a simple video effect generator utility. It creates a slow-motion
+effect by fading between frames of an animation.
 
-VideoPad is like IRC: the server has channels, users can join them and talk to
-other people on the same channel.
-
+Project homepage:
+http://www.nonoo.hu/projects/fader/
 
 
 DEVELOPER NOTES
 ---------------
-You'll need the following libraries to compile fader source:
+You'll need the following libraries to compile fader:
 
 * CxImage library
   http://sourceforge.net/projects/cximage
